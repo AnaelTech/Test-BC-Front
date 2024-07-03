@@ -6,12 +6,17 @@ import { ProfilComponent } from './user/profil/profil.component';
 import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.component';
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
 import { CrudUserComponent } from './admin/user/crud-user/crud-user.component';
+import { ContentComponent } from './content/content.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: HomeLayoutComponent,
     children: [
+      {
+        path: '',
+        component: ContentComponent,
+      },
       {
         path: 'login',
         component: LoginComponent,
