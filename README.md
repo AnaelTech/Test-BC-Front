@@ -10,7 +10,9 @@ Les employés pourront changer le statut des commandes utilisateurs, avoir un ac
 
 ## Suivi du projet
 
+03/07/2024
 J'ai ajouter le login et le register pour le user, j'ai ajouter les functions de récuperation du token, de vérification de connexion du user et le logout.
+Début d'admin pour le crud des users
 
 # BCFRONT
 
