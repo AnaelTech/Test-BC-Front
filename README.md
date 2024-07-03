@@ -8,6 +8,10 @@ Le projet est un site web qui permet de se connecter et de créer un compte util
 (Partie Employee & Admin)
 Les employés pourront changer le statut des commandes utilisateurs, avoir un accés user classique. Les Admin pourront assigner des employés aux commandes, et avoir un accès user admin.
 
+## Suivi du projet
+
+J'ai ajouter le login et le register pour le user, j'ai ajouter les functions de récuperation du token, de vérification de connexion du user et le logout.
+
 # BCFRONT
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
