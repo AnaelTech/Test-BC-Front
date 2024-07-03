@@ -1,15 +1,19 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../user/user.service';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
+  genders = ['Male', 'Female', 'Other', 'Prefer not to say'];
+
   private userService: UserService = inject(UserService);
   public formRegister: FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -18,7 +22,7 @@ export class RegisterComponent implements OnInit {
     birthday: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
-    gender: new FormControl(''),
+    genre: new FormControl([]),
   });
 
   constructor() {}
@@ -27,9 +31,13 @@ export class RegisterComponent implements OnInit {
 
   Register() {
     if (this.formRegister.valid) {
+      if (!Array.isArray(this.formRegister.value.genre)) {
+        this.formRegister.value.genre = [this.formRegister.value.genre]; // Convertir en tableau si nécessaire
+      }
       this.userService.addUser(this.formRegister.value).subscribe({
         complete: () => {
           console.log('Inscription terminée, veuillez vous connecter.');
+          console.log(this.formRegister.value);
         },
         error: (err) => {
           console.log(

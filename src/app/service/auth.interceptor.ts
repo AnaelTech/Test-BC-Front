@@ -21,6 +21,7 @@ export function authInterceptor(
 
   const headers = new HttpHeaders({
     Authorization: token,
+    'Content-Type': 'application/json;charset=utf-8',
   });
 
   const newReq = req.clone({

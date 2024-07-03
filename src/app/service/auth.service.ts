@@ -13,11 +13,28 @@ export class AuthService {
 
   login(credentials: any) {
     return this.http.post(this.url, credentials).subscribe((data: any) => {
-      localStorage.setItem('token', data.token);
+      this.saveToken(data.token);
     });
   }
 
   token() {
     return localStorage.getItem('token');
+  }
+
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  isLoggedIn() {
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      return !!token;
+    } else {
+      return false;
+    }
+  }
+
+  logout() {
+    localStorage.removeItem('token');
   }
 }
