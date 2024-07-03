@@ -1,18 +1,17 @@
-# VOICI LE SUIVIS DE MON PROJET DE SOUTENANCE LE HACKATHON DU PRESSING
+# SUIVI DE MON PROJET DE SOUTENANCE LE HACKATHON DU PRESSING
 
 ## Introduction
 
-(Partie User)
-Le projet est un site web qui permet de se connecter et de créer un compte utilisateu, il permettra de passer des commandes pour des prestations. Il permet également de se connecter avec un compte utilisateur existant. Le site est développé avec Angular , utilise le framework Tailwind CSS et à utilise une API backend qui est développée en Symfony.
+(Partie Utilisateur)
+Le projet est un site web qui permet de se connecter et de créer un compte utilisateur. Il permettra de passer des commandes pour des prestations. Il permet également de se connecter avec un compte utilisateur existant. Le site est développé avec Angular, utilise le framework Tailwind CSS et fait appel à une API backend développée en Symfony.
 
-(Partie Employee & Admin)
-Les employés pourront changer le statut des commandes utilisateurs, avoir un accés user classique. Les Admin pourront assigner des employés aux commandes, et avoir un accès user admin.
+(Partie Employé & Administrateur)
+Les employés pourront changer le statut des commandes utilisateurs et avoir un accès utilisateur classique. Les administrateurs pourront assigner des employés aux commandes et auront un accès utilisateur administrateur.
 
 ## Suivi du projet
 
 03/07/2024
-J'ai ajouter le login et le register pour le user, j'ai ajouter les functions de récuperation du token, de vérification de connexion du user et le logout.
-Début d'admin pour le crud des users
+J'ai ajouté le login et l'inscription pour les utilisateurs, ainsi que les fonctions de récupération du token, de vérification de connexion de l'utilisateur et de déconnexion. Début de l'implémentation du CRUD des utilisateurs pour l'administrateur.
 
 # BCFRONT
 
