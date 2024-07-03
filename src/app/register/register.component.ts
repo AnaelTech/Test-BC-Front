@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
     genre: new FormControl([]),
+    roles: new FormControl(['ROLE_USER']),
   });
 
   constructor() {}
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
   Register() {
     if (this.formRegister.valid) {
       if (!Array.isArray(this.formRegister.value.genre)) {
-        this.formRegister.value.genre = [this.formRegister.value.genre]; // Convertir en tableau si nécessaire
+        this.formRegister.value.genre = [this.formRegister.value.genre];
       }
       this.userService.addUser(this.formRegister.value).subscribe({
         complete: () => {

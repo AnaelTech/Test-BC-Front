@@ -10,13 +10,7 @@ export class UserService {
   private http: HttpClient = inject(HttpClient);
 
   constructor() {}
-
   addUser(user: any) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.post(this.url + 'users', JSON.stringify(user), {
-      headers,
-    });
+    return this.http.post(this.url + 'users', user);
   }
 }
