@@ -1,3 +1,13 @@
+# VOICI LE SUIVIS DE MON PROJET DE SOUTENANCE LE HACKATHON DU PRESSING
+
+## Introduction
+
+(Partie User)
+Le projet est un site web qui permet de se connecter et de créer un compte utilisateu, il permettra de passer des commandes pour des prestations. Il permet également de se connecter avec un compte utilisateur existant. Le site est développé avec Angular , utilise le framework Tailwind CSS et à utilise une API backend qui est développée en Symfony.
+
+(Partie Employee & Admin)
+Les employés pourront changer le statut des commandes utilisateurs, avoir un accés user classique. Les Admin pourront assigner des employés aux commandes, et avoir un accès user admin.
+
 # BCFRONT
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
