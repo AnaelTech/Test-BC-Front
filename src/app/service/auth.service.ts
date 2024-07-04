@@ -25,7 +25,7 @@ export class AuthService {
     localStorage.setItem('token', token);
   }
 
-  isLoggedIn() {
+  isLoggedIn(): boolean {
     if (typeof localStorage !== 'undefined') {
       const token = localStorage.getItem('token');
       return !!token;

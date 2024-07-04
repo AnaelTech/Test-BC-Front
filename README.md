@@ -13,6 +13,9 @@ Les employés pourront changer le statut des commandes utilisateurs et avoir un 
 03/07/2024
 J'ai ajouté le login et l'inscription pour les utilisateurs, ainsi que les fonctions de récupération du token, de vérification de connexion de l'utilisateur et de déconnexion. Début de l'implémentation du CRUD des utilisateurs pour l'administrateur.
 
+04/07/2024
+J'ai ajouté la fonctionnalité de supprimer un user depuis l'admin, afficher les users ( pour la suite la suppresion va concerner les role user qui ont le role employee), j'ai ajouté un peu de visuel sur le coté admin, la possibilité de se déconnecter.
+
 # BCFRONT
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.

@@ -7,6 +7,8 @@ import { AdminLayoutComponent } from './admin/admin-layout/admin-layout.componen
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
 import { CrudUserComponent } from './admin/user/crud-user/crud-user.component';
 import { ContentComponent } from './content/content.component';
+import { FormEditComponent } from './admin/user/form-edit/form-edit.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -41,18 +43,16 @@ export const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: ProfilComponent,
-        children: [
-          {
-            path: 'employees',
-            component: CrudUserComponent,
-          },
-        ],
+        component: DashboardComponent,
+      },
+      {
+        path: 'employees',
+        component: CrudUserComponent,
+      },
+      {
+        path: 'employees/:id',
+        component: FormEditComponent,
       },
     ],
-  },
-  {
-    path: 'employees',
-    component: CrudUserComponent,
   },
 ];

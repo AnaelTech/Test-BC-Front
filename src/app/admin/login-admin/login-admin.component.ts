@@ -18,19 +18,12 @@ export class LoginAdminComponent {
     password: new FormControl(''),
   });
 
-  ngOnInit(): void {
-    this.Login();
-  }
+  ngOnInit(): void {}
 
   Login() {
     if (this.formLoginAdmin.valid) {
       this.auth.login(this.formLoginAdmin.value);
-      if (this.auth.isLoggedIn()) {
-        this.router.navigate(['/dashboard']);
-      }
-    } else {
-      console.log('Erreur de connexion');
-      this.router.navigate(['/']);
+      this.router.navigate(['admin/dashboard']);
     }
     this.formLoginAdmin.reset();
   }
