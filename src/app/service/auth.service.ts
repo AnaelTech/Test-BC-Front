@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,14 @@ export class AuthService {
 
   constructor() {}
 
-  login(credentials: any) {
-    return this.http.post(this.url, credentials).subscribe((data: any) => {
-      this.saveToken(data.token);
-    });
+  login(credentials: any): Observable<any> {
+    return this.http.post<any>(this.url, credentials).pipe(
+      tap((data) => {
+        if (data.token) {
+          this.saveToken(data.token);
+        }
+      })
+    );
   }
 
   token() {
@@ -26,12 +31,8 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    if (typeof localStorage !== 'undefined') {
-      const token = localStorage.getItem('token');
-      return !!token;
-    } else {
-      return false;
-    }
+    const token = this.token();
+    return !!token;
   }
 
   logout() {

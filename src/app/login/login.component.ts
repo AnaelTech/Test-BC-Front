@@ -18,20 +18,31 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  ngOnInit(): void {
-    this.Login();
-  }
+  ngOnInit(): void {}
 
   Login() {
     if (this.formLogin.valid) {
-      this.auth.login(this.formLogin.value);
-      if (this.auth.isLoggedIn()) {
-        this.router.navigate(['/profil']);
-      }
+      this.auth.login(this.formLogin.value).subscribe({
+        next: () => {
+          if (this.auth.isLoggedIn()) {
+            console.log('Connexion réussie');
+            this.router.navigate(['/']);
+          } else {
+            console.log('Erreur de connexion');
+            this.router.navigate(['/login']);
+          }
+          this.formLogin.reset();
+        },
+        error: (error) => {
+          console.log('Erreur de connexion', error);
+          this.router.navigate(['/login']);
+          this.formLogin.reset();
+        },
+      });
     } else {
-      console.log('Erreur de connexion');
-      this.router.navigate(['/']);
+      console.log('Formulaire invalide');
+      this.router.navigate(['/login']);
+      this.formLogin.reset();
     }
-    this.formLogin.reset();
   }
 }

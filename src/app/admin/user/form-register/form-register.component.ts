@@ -39,8 +39,8 @@ export class FormRegisterComponent {
       }
       this.userService.addUser(this.formRegisterUser.value).subscribe({
         complete: () => {
-          console.log('Inscription terminée, veuillez vous connecter.');
-          console.log(this.formRegisterUser.value);
+          // console.log('Inscription terminée, veuillez vous connecter.');
+          // console.log(this.formRegisterUser.value);
           this.router.navigate(['/admin/employees']);
         },
         error: (err) => {
@@ -48,7 +48,7 @@ export class FormRegisterComponent {
             "L'utilisateur existe déjà ou une autre erreur est survenue :",
             err
           );
-          console.log(this.formRegisterUser.value);
+          //console.log(this.formRegisterUser.value);
         },
       });
     } else {
