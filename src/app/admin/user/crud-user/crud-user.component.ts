@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { User } from '../../../interface';
 import { UserService } from '../../../user/user.service';
-import { FormEditComponent } from '../form-edit/form-edit.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -36,5 +35,9 @@ export class CrudUserComponent implements OnInit {
     this.userService.deleteUser(user.id).subscribe(() => {
       this.users = this.users.filter((u) => u.id !== user.id);
     });
+  }
+
+  goToAdd() {
+    this.router.navigate(['admin/employees/add']);
   }
 }

@@ -9,6 +9,7 @@ import { CrudUserComponent } from './admin/user/crud-user/crud-user.component';
 import { ContentComponent } from './content/content.component';
 import { FormEditComponent } from './admin/user/form-edit/form-edit.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { FormRegisterComponent } from './admin/user/form-register/form-register.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,10 @@ export const routes: Routes = [
       {
         path: 'employees',
         component: CrudUserComponent,
+      },
+      {
+        path: 'employees/add',
+        component: FormRegisterComponent,
       },
       {
         path: 'employees/:id',

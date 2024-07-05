@@ -33,17 +33,39 @@ export class FormEditComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.userService.getUser(id as string).subscribe((user: User) => {
-      this.user = user;
-      console.log(this.user);
-    });
+    if (id) {
+      this.userService.getUser(id).subscribe(
+        (user: User) => {
+          this.user = user;
+          this.formEditUser.patchValue({
+            name: user.name,
+            lastname: user.lastname,
+            email: user.email,
+            picture: user.profilPicture,
+          });
+        },
+        (error) => {
+          console.error('Error fetching user', error);
+        }
+      );
+    }
   }
 
-  editUser(user: User) {
-    this.userService.updateUser(user).subscribe((user: User) => {
-      this.user = user;
-      console.log(this.user);
-    });
-    this.router.navigate(['admin/employees']);
+  editUser() {
+    if (this.formEditUser.valid) {
+      const updatedUser: User = {
+        ...this.user,
+        ...this.formEditUser.value,
+      };
+      this.userService.updateUser(updatedUser).subscribe(
+        (user: User) => {
+          this.user = user;
+          this.router.navigate(['admin/employees']);
+        },
+        (error) => {
+          console.error('Error updating user', error);
+        }
+      );
+    }
   }
 }
