@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../interface';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService } from '../service/auth.service';
@@ -56,6 +56,28 @@ export class UserService {
       const tokenPayload: any = jwtDecode(token);
       const userId = tokenPayload.id;
       return userId;
+    }
+  }
+
+  isAdmin(): boolean {
+    const userRoles = this.getRoles();
+    if (userRoles && Array.isArray(userRoles)) {
+      const isAdmin = userRoles.includes('ROLE_ADMIN');
+      return isAdmin;
+    } else {
+      console.log('role : VISITOR');
+      return false;
+    }
+  }
+
+  isSuperAdmin(): boolean {
+    const userRoles = this.getRoles();
+    if (userRoles && Array.isArray(userRoles)) {
+      const isSuperAdmin = userRoles.includes('ROLE_SUPER_ADMIN');
+      console.log('role : SUPER_ADMIN');
+      return isSuperAdmin;
+    } else {
+      return false;
     }
   }
 }

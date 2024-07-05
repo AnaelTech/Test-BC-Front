@@ -14,17 +14,23 @@ export class CrudUserComponent implements OnInit {
   userService: UserService = inject(UserService);
   router: Router = inject(Router);
   users: User[] = [];
+  originalUsers: User[] = [];
 
   constructor() {}
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getEmployee();
   }
 
-  getUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
+  getEmployee() {
+    this.userService.getUsers().subscribe({
+      next: (users: User[]) =>
+        (this.users = users.filter((user) => this.isAdmin(user))),
     });
+  }
+
+  isAdmin(user: User): boolean {
+    return user.roles.includes('ROLE_ADMIN');
   }
 
   goToEdit(user: User) {
@@ -39,5 +45,17 @@ export class CrudUserComponent implements OnInit {
 
   goToAdd() {
     this.router.navigate(['admin/employees/add']);
+  }
+
+  search(event: any) {
+    if (event.target.value === '') {
+      this.users = [...this.originalUsers];
+    } else {
+      this.users = this.users.filter((user: User) => {
+        return user.name
+          .toLowerCase()
+          .includes(event.target.value.toLowerCase());
+      });
+    }
   }
 }

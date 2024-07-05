@@ -41,8 +41,12 @@ export class SidebarComponent implements OnInit {
     return this.auth.isLoggedIn();
   }
 
+  isAdmin() {
+    return this.userService.isAdmin();
+  }
+
   logout() {
     this.auth.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(['/admin']);
   }
 }

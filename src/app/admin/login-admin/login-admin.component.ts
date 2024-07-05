@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-login-admin',
@@ -11,6 +12,7 @@ import { AuthService } from '../../service/auth.service';
   styleUrl: './login-admin.component.css',
 })
 export class LoginAdminComponent {
+  private userService: UserService = inject(UserService);
   private auth: AuthService = inject(AuthService);
   private router: Router = inject(Router);
   public formLoginAdmin: FormGroup = new FormGroup({
@@ -18,13 +20,38 @@ export class LoginAdminComponent {
     password: new FormControl(''),
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.getRoles();
+  }
 
   Login() {
     if (this.formLoginAdmin.valid) {
-      this.auth.login(this.formLoginAdmin.value);
-      this.router.navigate(['admin/dashboard']);
+      this.auth.login(this.formLoginAdmin.value).subscribe({
+        next: () => {
+          if (this.isAdmin() && this.auth.isLoggedIn()) {
+            console.log('Connexion réussie');
+            this.router.navigate(['admin/dashboard']);
+          } else {
+            console.log('Erreur de connexion');
+            this.router.navigate(['/admin']);
+            return;
+          }
+          this.formLoginAdmin.reset();
+        },
+        error: (error) => {
+          console.log('Erreur de connexion', error);
+          this.router.navigate(['/admin']);
+          this.formLoginAdmin.reset();
+        },
+      });
+    } else {
+      console.log('Formulaire invalide');
+      this.router.navigate(['/admin']);
+      this.formLoginAdmin.reset();
     }
-    this.formLoginAdmin.reset();
+  }
+
+  isAdmin() {
+    return this.userService.isAdmin();
   }
 }
