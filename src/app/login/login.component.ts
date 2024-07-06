@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   private auth: AuthService = inject(AuthService);
   private router: Router = inject(Router);
+  private userService: UserService = inject(UserService);
   public formLogin: FormGroup = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),

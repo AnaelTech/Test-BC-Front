@@ -16,6 +16,9 @@ J'ai ajouté le login et l'inscription pour les utilisateurs, ainsi que les fonc
 04/07/2024
 J'ai ajouté la fonctionnalité de supprimer un user depuis l'admin, afficher les users ( pour la suite la suppresion va concerner les role user qui ont le role employee), j'ai ajouté un peu de visuel sur le coté admin, la possibilité de se déconnecter.
 
+06/07/2024
+J'ai ajouté le CRUD des prestations pour l'admin, le guard sur les pages admin ainsi que la page 404 pour les routes non trouvées. Et pour finit l'affiche des prestations sur le site.
+
 # BCFRONT
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.

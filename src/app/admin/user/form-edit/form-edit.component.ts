@@ -20,7 +20,7 @@ export class FormEditComponent implements OnInit {
     lastname: '',
     email: '',
     roles: '',
-    profilPicture: '',
+    picture: '',
   };
   route: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
@@ -41,7 +41,7 @@ export class FormEditComponent implements OnInit {
             name: user.name,
             lastname: user.lastname,
             email: user.email,
-            picture: user.profilPicture,
+            picture: user.picture,
           });
         },
         (error) => {

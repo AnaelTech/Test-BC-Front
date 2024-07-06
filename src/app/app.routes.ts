@@ -10,6 +10,12 @@ import { ContentComponent } from './content/content.component';
 import { FormEditComponent } from './admin/user/form-edit/form-edit.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { FormRegisterComponent } from './admin/user/form-register/form-register.component';
+import { CrudPrestationComponent } from './admin/prestation/crud-prestation/crud-prestation.component';
+import { FormEditPrestationComponent } from './admin/prestation/form-edit/form-edit-prestation.component';
+import { FormRegisterPrestationComponent } from './admin/prestation/form-register/form-register-prestation.component';
+import { PrestationListComponent } from './prestation/prestation-list/prestation-list.component';
+import { adminGuard } from './service/admin.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +34,10 @@ export const routes: Routes = [
         path: 'profil',
         component: ProfilComponent,
       },
+      {
+        path: 'prestations',
+        component: PrestationListComponent,
+      },
     ],
   },
   {
@@ -45,19 +55,42 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+        canActivate: [adminGuard],
       },
       {
         path: 'employees',
         component: CrudUserComponent,
+        canActivate: [adminGuard],
       },
       {
         path: 'employees/add',
         component: FormRegisterComponent,
+        canActivate: [adminGuard],
       },
       {
         path: 'employees/:id',
         component: FormEditComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'prestations',
+        component: CrudPrestationComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'prestations/add',
+        component: FormRegisterPrestationComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'prestations/:id',
+        component: FormEditPrestationComponent,
+        canActivate: [adminGuard],
       },
     ],
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
   },
 ];

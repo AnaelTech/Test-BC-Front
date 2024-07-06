@@ -3,11 +3,12 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { UserService } from '../../user/user.service';
 import { User } from '../../interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
@@ -20,8 +21,9 @@ export class SidebarComponent implements OnInit {
     lastname: '',
     email: '',
     roles: '',
-    profilPicture: '',
+    picture: '',
   };
+  isSidebarOpen = false;
 
   router: Router = inject(Router);
 
@@ -39,6 +41,10 @@ export class SidebarComponent implements OnInit {
 
   isLoggedIn() {
     return this.auth.isLoggedIn();
+  }
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 
   isAdmin() {

@@ -5,7 +5,7 @@ export interface User {
   email: string;
   password?: string;
   roles: string;
-  profilPicture: string;
+  picture: string;
 }
 
 export interface Credentials {
@@ -15,4 +15,13 @@ export interface Credentials {
 
 export interface Token {
   token: string;
+}
+
+export interface Prestation {
+  id?: number;
+  name: string;
+  description: string;
+  picture: string;
+  price: number;
+  category: string;
 }

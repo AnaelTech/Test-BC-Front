@@ -42,7 +42,7 @@
                         <path clip-rule="evenodd" fill-rule="evenodd"
                             d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                     </svg>
-                    Add employee
+                    Add prestation
                 </button>
                 <div class="flex items-center space-x-3 w-full md:w-auto">
                     <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
@@ -87,14 +87,11 @@
                         </th>
                         <th scope="col" class="p-5">Picture</th>
                         <th scope="col" class="p-5">Name</th>
-                        <th scope="col" class="p-5">Lastname</th>
-                        <th scope="col" class="p-5 ">Email</th>
-                        <th scope="col" class="p-5">Nombre commandes</th>
-                        <th scope="col" class="p-5">Planning</th>
+                        <th scope="col" class="p-5">Price</th>
                         <th scope="col" class="p-5">Edit</th>
                     </tr>
                 </thead>
-                @for(user of users; track user.id){
+                @for(prestation of prestations; track prestation.id){
                 <tbody>
                     <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <td class="p-4 w-4">
@@ -106,41 +103,21 @@
                         </td>
                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="flex items-center ml-3">
-                                <img [src]="user.picture" [alt]="user.name" class="h-8 w-auto">
+                                <img [src]="prestation.picture" [alt]="prestation.name" class="h-8 w-auto">
                             </div>
                         </th>
                         <td class="px-4 py-3">
                             <div class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{user.name}}</div>
+                                {{prestation.name}}</div>
                         </td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="text-center">
-                                {{user.lastname}}
+                                {{prestation.price}} €
                             </div>
                         </td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{user.email}}</td>
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">
-                            4</td>
-                        <td class=" px-4 py-3 font-mediumtext-gray-900 whitespace-nowrap dark:text-white">
-                            <button type="button">
-                                <div class="flex items-center mx-5 px-1">
-                                    <svg xmlns=" http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </td>
-                        <!-- <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <div class="flex items-center">
-                                    Hier mon reuf
-                                </div>
-                            </td> -->
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="flex items-center space-x-4">
-                                <button (click)="goToEdit(user)" type="button"
+                                <button (click)="goToEdit(prestation)" type="button"
                                     class="py-2 px-3 flex items-center  text-sm font-medium text-center text-dark bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewbox="0 0 20 20"
                                         fill="bg-green-400" aria-hidden=" true">
@@ -161,7 +138,7 @@
                                     </svg>
                                     Preview
                                 </button>
-                                <button (click)="deleteUser(user)" type="button"
+                                <button (click)="deletePrestation(prestation)" type="button"
                                     class="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
                                         viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
