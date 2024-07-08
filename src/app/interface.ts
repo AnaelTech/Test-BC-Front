@@ -25,3 +25,16 @@ export interface Prestation {
   price: number;
   category: string;
 }
+
+export interface Article {
+  id?: number;
+  name: string;
+  description: string;
+  picture: string;
+  category: string;
+}
+
+export interface Category {
+  id?: number;
+  name: string;
+}

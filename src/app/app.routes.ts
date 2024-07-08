@@ -16,6 +16,8 @@ import { FormRegisterPrestationComponent } from './admin/prestation/form-registe
 import { PrestationListComponent } from './prestation/prestation-list/prestation-list.component';
 import { adminGuard } from './service/admin.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ArticleListComponent } from './article/article-list/article-list.component';
+import { ArticleDetailComponent } from './article/article-detail/article-detail.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +39,15 @@ export const routes: Routes = [
       {
         path: 'prestations',
         component: PrestationListComponent,
+      },
+      {
+        path: 'articles',
+        component: ArticleListComponent,
+        children: [],
+      },
+      {
+        path: 'articles/:id',
+        component: ArticleDetailComponent,
       },
     ],
   },
