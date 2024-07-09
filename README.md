@@ -19,6 +19,9 @@ J'ai ajouté la fonctionnalité de supprimer un user depuis l'admin, afficher le
 06/07/2024
 J'ai ajouté le CRUD des prestations pour l'admin, le guard sur les pages admin ainsi que la page 404 pour les routes non trouvées. Et pour finir j'affiche des prestations sur le site.
 
+07/07/2024
+J'ai ajouté les articles ainsi que les catgerories de chaque article
+
 # BCFRONT
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
