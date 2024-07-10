@@ -48,3 +48,16 @@ export interface Cart {
   priceHT: number;
   priceTTC: number;
 }
+
+export interface Order {
+  id: number;
+  clientId: number;
+  status: string;
+  totalPaid: number;
+  articles: OrderArticle[];
+}
+
+export interface OrderArticle {
+  articleId: number;
+  quantity: number;
+}
