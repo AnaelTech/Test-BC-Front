@@ -32,9 +32,19 @@ export interface Article {
   description: string;
   picture: string;
   category: string;
+  quantity: number;
 }
 
 export interface Category {
   id?: number;
   name: string;
+}
+
+export interface Cart {
+  id?: number;
+  article: Article[];
+  prestation: Prestation[];
+  quantity: number;
+  priceHT: number;
+  priceTTC: number;
 }

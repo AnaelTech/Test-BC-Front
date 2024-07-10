@@ -17,6 +17,10 @@ export class ArticleService {
     return this.http.get<Article[]>(this.url + 'articles');
   }
 
+  getArticle(id: string): Observable<Article> {
+    return this.http.get<Article>(this.url + 'articles/' + id);
+  }
+
   getCategory(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + 'categories');
   }

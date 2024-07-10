@@ -18,6 +18,7 @@ import { adminGuard } from './service/admin.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ArticleListComponent } from './article/article-list/article-list.component';
 import { ArticleDetailComponent } from './article/article-detail/article-detail.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,10 @@ export const routes: Routes = [
       {
         path: 'articles/:id',
         component: ArticleDetailComponent,
+      },
+      {
+        path: 'cart',
+        component: CartComponent,
       },
     ],
   },

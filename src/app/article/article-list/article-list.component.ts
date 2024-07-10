@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ArticleService } from '../article.service';
 import { Article, Category } from '../../interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article',
@@ -13,6 +14,7 @@ export class ArticleListComponent implements OnInit {
   public articles: Article[] = [];
   public categorys: Category[] = [];
   public category: any[] = [];
+  private router: Router = inject(Router);
   private articleService: ArticleService = inject(ArticleService);
   count = 0;
 
@@ -29,21 +31,18 @@ export class ArticleListComponent implements OnInit {
         ...article,
         category: this.getCategoryName(article.category),
       }));
-      console.log(this.articles);
     });
   }
 
   getCategory() {
     this.articleService.getCategory().subscribe((category: any) => {
       this.categorys = category;
-      console.log(this.categorys);
     });
   }
 
   getCategoryById(id: string) {
     this.articleService.getCategoryById(id).subscribe((category: any) => {
       this.category = category;
-      console.log(this.category);
     });
   }
 
@@ -56,5 +55,9 @@ export class ArticleListComponent implements OnInit {
       (cat) => cat.id === parseInt(categoryId, 10)
     );
     return category ? category.name : 'Unknown';
+  }
+
+  goToDetail(article: Article) {
+    this.router.navigate(['articles/', article.id]);
   }
 }

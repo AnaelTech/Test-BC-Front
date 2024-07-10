@@ -1,0 +1,62 @@
+<div class="min-h-screen flex flex-col items-center ">
+    <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg mt-8">
+        <div class="flex justify-between items-center p-6 border-b border-gray-200">
+            <h1 class="text-2xl font-bold">{{user.name}} Account</h1>
+            <button class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded">Sign out</button>
+        </div>
+        <div class="flex">
+            <div class="w-1/4 border-r border-gray-200 p-6">
+                <div class="flex flex-col items-center">
+                    <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
+                        <img [src]="user.picture" alt="user photo">
+                    </div>
+                    <h2 class=" text-xl font-semibold mb-2">{{user.name}} {{user.lastname}}</h2>
+                    <p class="text-gray-600">{{user.email}}</p>
+                </div>
+                <nav class="mt-6">
+                    <ul>
+                        <li class="mb-4">
+                            <a href="#" class="text-orange-500 font-semibold">Personal information</a>
+                        </li>
+                        <li class="mb-4">
+                            <a href="#" class="text-gray-600">Billing & Payments</a>
+                        </li>
+                        <li class="mb-4">
+                            <a href="#" class="text-gray-600">Order History</a>
+                        </li>
+                        <li class="mb-4">
+                            <a href="#" class="text-gray-600">Gift Cards</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="w-3/4 p-6">
+                <h2 class="text-2xl font-semibold mb-6">Personal information</h2>
+                <p class="text-gray-600 mb-6">Manage your personal information, including phone numbers and email
+                    addresses where you can be contacted</p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="p-4 bg-gray-100 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">Name</h3>
+                        <p class="text-gray-800">{{user.name}} {{user.lastname}}</p>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">Date of Birth</h3>
+                        <p class="text-gray-800">07 July 1993</p>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">Country Region</h3>
+                        <p class="text-gray-800">Georgia, Tbilisi</p>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">Language</h3>
+                        <p class="text-gray-800">English (UK) - English</p>
+                    </div>
+                    <div class="col-span-2 p-4 bg-gray-100 rounded-lg">
+                        <h3 class="text-lg font-semibold mb-2">Contactable at</h3>
+                        <p class="text-gray-800">{{user.email}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
