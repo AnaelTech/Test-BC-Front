@@ -3,6 +3,7 @@ import { CartService } from '../cart.service';
 import { Article, Cart } from '../interface';
 import { Subject, takeUntil } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { OrderService } from '../orderService.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,6 +15,7 @@ import { RouterLink } from '@angular/router';
 export class CartComponent implements OnInit, OnDestroy {
   articleCart: Article[] = [];
   cartService: CartService = inject(CartService);
+  private orderService: OrderService = inject(OrderService);
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
@@ -51,4 +53,10 @@ export class CartComponent implements OnInit, OnDestroy {
       item.quantity = 0;
     }
   }
+
+  // OnSubmit() {
+  //   this.cartService.getCartItems().subscribe((cartItems: Article[]) => {
+  //     this.orderService.createOrder(cartItems);
+  //   });
+  // }
 }

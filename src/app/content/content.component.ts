@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PrestationService } from '../prestation/prestation.service';
-import { Prestation } from '../interface';
+import { ApiListResponse, Prestation } from '../interface';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -22,8 +22,8 @@ export class ContentComponent implements OnInit {
 
   getPrestations() {
     this.PrestationService.getPrestations().subscribe(
-      (prestations: Prestation[]) => {
-        this.prestations = prestations.slice(0, 3);
+      (response: ApiListResponse<Prestation>) => {
+        this.prestations = response['hydra:member'].slice(0, 3);
       }
     );
   }

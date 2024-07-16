@@ -64,30 +64,31 @@
                     </div>
                 </div>
                 <div class="mt-10">
-                    <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
+                    <h3 class="text-sm font-medium text-gray-900 mb-4">Select your prestations</h3>
+                    <fieldset>
+                        <legend class="sr-only">Checkboxes</legend>
 
-                    <div class="mt-4">
-                        <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-                            <li class="text-gray-400"><span class="text-gray-600">Hand cut and sewn locally</span></li>
-                            <li class="text-gray-400"><span class="text-gray-600">Dyed with our proprietary
-                                    colors</span></li>
-                            <li class="text-gray-400"><span class="text-gray-600">Pre-washed &amp; pre-shrunk</span>
-                            </li>
-                            <li class="text-gray-400"><span class="text-gray-600">Ultra-soft 100% cotton</span></li>
-                        </ul>
-                    </div>
-                </div>
+                        <div class="space-y-2">
+                            @for(prestation of prestations; track prestation.id ) {
+                            <label for="Option1"
+                                class="flex cursor-pointer items-start gap-4 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50">
+                                <div class="flex items-center">
+                                    &#8203;
+                                    <input type="checkbox" class="size-4 rounded border-gray-300" id="Option1" />
+                                </div>
 
-                <div class="mt-10">
-                    <h2 class="text-sm font-medium text-gray-900">Details</h2>
+                                <div>
+                                    <strong class="font-medium text-gray-900"> {{ prestation.name }} </strong>
 
-                    <div class="mt-4 space-y-6">
-                        <p class="text-sm text-gray-600">The 6-Pack includes two black, two white, and two heather gray
-                            Basic Tees. Sign up for our subscription service and be the first to get new, exciting
-                            colors, like our upcoming &quot;Charcoal Gray&quot; limited release.</p>
-                    </div>
+                                    <p class="mt-1 text-pretty text-sm text-gray-700">
+                                        {{ prestation.description }}
+                                    </p>
+                                </div>
+                            </label>
+                            }
+                        </div>
+                    </fieldset>
                 </div>
             </div>
         </div>
     </div>
-</div>

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { PrestationService } from '../../../prestation/prestation.service';
-import { Prestation } from '../../../interface';
+import { ApiListResponse, Prestation } from '../../../interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,7 +24,10 @@ export class CrudPrestationComponent implements OnInit {
 
   getPrestations() {
     this.prestationService.getPrestations().subscribe({
-      next: (prestations: Prestation[]) => (this.prestations = prestations),
+      next: (response: ApiListResponse<Prestation>) => {
+        this.prestations = response['hydra:member'];
+        this.originalPrestations = [...this.prestations];
+      },
     });
   }
 

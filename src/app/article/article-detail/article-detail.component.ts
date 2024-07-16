@@ -3,6 +3,7 @@ import { ArticleService } from '../article.service';
 import { PrestationService } from '../../prestation/prestation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../cart.service';
+import { ApiListResponse, Prestation, Category } from '../../interface';
 
 @Component({
   selector: 'app-article-detail',
@@ -13,8 +14,10 @@ import { CartService } from '../../cart.service';
 })
 export class ArticleDetailComponent implements OnInit {
   private articleService: ArticleService = inject(ArticleService);
-  // private prestationService: PrestationService = inject(PrestationService);
+  private prestationService: PrestationService = inject(PrestationService);
   private cartService: CartService = inject(CartService);
+  public prestations: Prestation[] = [];
+  public category: Category | undefined;
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
   article = {
@@ -24,6 +27,7 @@ export class ArticleDetailComponent implements OnInit {
     picture: '',
     category: '',
   };
+  categoryId: string = '';
 
   constructor() {}
 
@@ -35,6 +39,7 @@ export class ArticleDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.articleService.getArticle(id).subscribe((article: any) => {
       this.article = article;
+      console.log(this.article);
     });
   }
 

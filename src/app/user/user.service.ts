@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Observable, of } from 'rxjs';
-import { User } from '../interface';
+import { ApiListResponse, User } from '../interface';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService } from '../service/auth.service';
 
@@ -20,8 +20,8 @@ export class UserService {
     return this.http.post(this.url + 'users', user);
   }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url + 'users');
+  getUsers(): Observable<ApiListResponse<User>> {
+    return this.http.get<ApiListResponse<User>>(this.url + 'users');
   }
 
   getUser(id: string): Observable<User> {

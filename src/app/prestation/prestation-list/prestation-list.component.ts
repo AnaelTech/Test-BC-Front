@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Prestation } from '../../interface';
+import { ApiListResponse, Prestation } from '../../interface';
 import { PrestationService } from '../prestation.service';
 
 @Component({
@@ -20,8 +20,10 @@ export class PrestationListComponent {
   }
 
   getPrestations() {
-    this.prestationService.getPrestations().subscribe((prestations) => {
-      this.prestations = prestations;
-    });
+    this.prestationService
+      .getPrestations()
+      .subscribe((response: ApiListResponse<Prestation>) => {
+        this.prestations = response['hydra:member'];
+      });
   }
 }

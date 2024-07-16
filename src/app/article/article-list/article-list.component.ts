@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ArticleService } from '../article.service';
-import { Article, Category } from '../../interface';
+import { ApiListResponse, Article, Category } from '../../interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class ArticleListComponent implements OnInit {
   public articles: Article[] = [];
   public categorys: Category[] = [];
-  public category: any[] = [];
+  public category: Category[] = [];
   private router: Router = inject(Router);
   private articleService: ArticleService = inject(ArticleService);
   count = 0;
@@ -26,23 +26,32 @@ export class ArticleListComponent implements OnInit {
   }
 
   getArticles() {
-    this.articleService.getArticles().subscribe((articles: Article[]) => {
-      this.articles = articles.map((article) => ({
-        ...article,
-        category: this.getCategoryName(article.category),
-      }));
+    this.articleService.getArticles().subscribe({
+      next: (response: ApiListResponse<Article>) => {
+        this.articles = response['hydra:member'].map((article) => ({
+          ...article,
+          category: this.getCategoryName(article.category),
+        }));
+      },
+      error: (err) => console.error(err),
     });
   }
 
   getCategory() {
-    this.articleService.getCategory().subscribe((category: any) => {
-      this.categorys = category;
+    this.articleService.getCategory().subscribe({
+      next: (response: ApiListResponse<Category>) => {
+        this.categorys = response['hydra:member'];
+      },
+      error: (err) => console.error(err),
     });
   }
 
   getCategoryById(id: string) {
-    this.articleService.getCategoryById(id).subscribe((category: any) => {
-      this.category = category;
+    this.articleService.getCategoryById(id).subscribe({
+      next: (category: Category) => {
+        this.categorys.push(category);
+      },
+      error: (err) => console.error(err),
     });
   }
 

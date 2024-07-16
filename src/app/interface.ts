@@ -8,6 +8,12 @@ export interface User {
   picture: string;
 }
 
+export interface ApiListResponse<T> {
+  '@id': string;
+  'hydra:totalItems': number;
+  'hydra:member': T[];
+}
+
 export interface Credentials {
   username: string;
   password: string;
@@ -27,6 +33,8 @@ export interface Prestation {
 }
 
 export interface Article {
+  '@id': string;
+  '@type': string;
   id?: number;
   name: string;
   description: string;
@@ -36,8 +44,13 @@ export interface Article {
 }
 
 export interface Category {
+  '@id': string;
+  '@type': string;
   id?: number;
   name: string;
+  parent?: string;
+  children?: Category[];
+  Prestation?: string[];
 }
 
 export interface Cart {

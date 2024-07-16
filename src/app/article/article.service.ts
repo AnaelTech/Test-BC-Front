@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Observable } from 'rxjs';
-import { Article, Category } from '../interface';
+import { forkJoin, map, Observable, switchMap } from 'rxjs';
+import { ApiListResponse, Article, Category, Prestation } from '../interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,16 +13,16 @@ export class ArticleService {
 
   constructor() {}
 
-  getArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(this.url + 'articles');
+  getArticles(): Observable<ApiListResponse<Article>> {
+    return this.http.get<ApiListResponse<Article>>(this.url + 'articles');
   }
 
   getArticle(id: string): Observable<Article> {
     return this.http.get<Article>(this.url + 'articles/' + id);
   }
 
-  getCategory(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.url + 'categories');
+  getCategory(): Observable<ApiListResponse<Category>> {
+    return this.http.get<ApiListResponse<Category>>(this.url + 'categories');
   }
 
   getCategoryById(id: string): Observable<Category> {

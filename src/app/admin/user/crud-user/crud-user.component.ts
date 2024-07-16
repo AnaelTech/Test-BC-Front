@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { User } from '../../../interface';
+import { ApiListResponse, User } from '../../../interface';
 import { UserService } from '../../../user/user.service';
 import { Router } from '@angular/router';
 
@@ -23,9 +23,10 @@ export class CrudUserComponent implements OnInit {
   }
 
   getEmployee() {
-    this.userService.getUsers().subscribe({
-      next: (users: User[]) =>
-        (this.users = users.filter((user) => this.isAdmin(user))),
+    this.userService.getUsers().subscribe((response: ApiListResponse<User>) => {
+      this.users = response['hydra:member'].filter((user) =>
+        this.isAdmin(user)
+      );
     });
   }
 

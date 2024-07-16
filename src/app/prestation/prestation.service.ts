@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Prestation } from '../interface';
+import { ApiListResponse, Prestation } from '../interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,8 @@ export class PrestationService {
 
   constructor() {}
 
-  getPrestations(): Observable<Prestation[]> {
-    return this.http.get<Prestation[]>(this.url + 'prestations');
+  getPrestations(): Observable<ApiListResponse<Prestation>> {
+    return this.http.get<ApiListResponse<Prestation>>(this.url + 'prestations');
   }
 
   getPrestationById(id: string): Observable<Prestation> {
