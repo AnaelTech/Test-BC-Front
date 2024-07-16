@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { CartService } from '../cart.service';
 import { Article, Cart } from '../interface';
 import { Subject, takeUntil } from 'rxjs';
@@ -14,6 +14,7 @@ import { OrderService } from '../orderService.service';
 })
 export class CartComponent implements OnInit, OnDestroy {
   articleCart: Article[] = [];
+  price = signal(0);
   cart: Cart = {
     id: 0,
     article: [],

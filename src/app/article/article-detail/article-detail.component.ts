@@ -37,21 +37,8 @@ export class ArticleDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
     this.articleService.getArticle(id).subscribe((article: any) => {
       this.article = article;
-      console.log(this.article);
-      this.articleService
-        .getOriginCategory(this.article.category)
-        .subscribe((category: any) => {
-          this.category = category;
-          const prestationIds = category.Prestation;
-
-          prestationIds.forEach((id: string) => {
-            this.articleService
-              .getOriginPrestation(id)
-              .subscribe((prestation: any) => {
-                this.prestations.push(prestation);
-              });
-          });
-        });
+      this.prestations = article.category.Prestation;
+      console.log(this.prestations);
     });
   }
 

@@ -28,10 +28,7 @@ export class ArticleListComponent implements OnInit {
   getArticles() {
     this.articleService.getArticles().subscribe({
       next: (response: ApiListResponse<Article>) => {
-        this.articles = response['hydra:member'].map((article) => ({
-          ...article,
-          category: this.getCategoryName(article.category),
-        }));
+        this.articles = response['hydra:member'];
       },
       error: (err) => console.error(err),
     });
@@ -44,26 +41,6 @@ export class ArticleListComponent implements OnInit {
       },
       error: (err) => console.error(err),
     });
-  }
-
-  getCategoryById(id: string) {
-    this.articleService.getCategoryById(id).subscribe({
-      next: (category: Category) => {
-        this.categorys.push(category);
-      },
-      error: (err) => console.error(err),
-    });
-  }
-
-  getCategoryName(categoryUrl: string): string {
-    const categoryId = categoryUrl.split('/').pop();
-    if (!categoryId) {
-      return 'Unknown';
-    }
-    const category = this.categorys.find(
-      (cat) => cat.id === parseInt(categoryId, 10)
-    );
-    return category ? category.name : 'Unknown';
   }
 
   goToDetail(article: Article) {

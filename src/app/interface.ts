@@ -39,7 +39,7 @@ export interface Article {
   name: string;
   description: string;
   picture: string;
-  category: string;
+  category: Category;
   quantity: number;
   price: number;
 }

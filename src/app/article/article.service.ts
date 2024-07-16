@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
-import { ApiListResponse, Article, Category, Prestation } from '../interface';
+import { ApiListResponse, Article, Category } from '../interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,21 +24,5 @@ export class ArticleService {
 
   getCategory(): Observable<ApiListResponse<Category>> {
     return this.http.get<ApiListResponse<Category>>(this.url + 'categories');
-  }
-
-  getCategoryById(id: string): Observable<Category> {
-    return this.http.get<Category>(this.url + 'categories/' + id);
-  }
-
-  getOriginCategory(Category: string): Observable<ApiListResponse<Category>> {
-    return this.http.get<ApiListResponse<Category>>(this.originUrl + Category);
-  }
-
-  getOriginPrestation(
-    Prestation: string
-  ): Observable<ApiListResponse<Prestation>> {
-    return this.http.get<ApiListResponse<Prestation>>(
-      this.originUrl + Prestation
-    );
   }
 }
