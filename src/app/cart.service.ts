@@ -54,4 +54,11 @@ export class CartService {
       existingItem.quantity--;
     }
   }
+
+  incrementPriceArticle(item: Article) {
+    const existingItem = this.cartItems.find(
+      (cartItem) => cartItem.id === item.id
+    );
+    existingItem.price * existingItem.quantity;
+  }
 }

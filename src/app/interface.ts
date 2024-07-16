@@ -61,6 +61,7 @@ export interface Cart {
   quantity: number;
   priceHT: number;
   priceTTC: number;
+  TVA: number;
 }
 
 export interface Order {

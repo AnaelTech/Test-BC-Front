@@ -43,7 +43,6 @@ export class HeaderComponent {
   getUser() {
     this.userService.getUserById().subscribe((data: User) => {
       this.user = data;
-      console.log(this.user);
     });
   }
 

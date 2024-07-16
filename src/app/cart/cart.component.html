@@ -38,7 +38,8 @@
                                     </button>
                                 </div>
                                 <div class="text-end md:order-4 md:w-32">
-                                    <p class="text-base font-bold text-gray-900 dark:text-white">$1,499</p>
+                                    <p class="text-base font-bold text-gray-900 dark:text-white">
+                                        {{article.price}} €</p>
                                 </div>
                             </div>
 
@@ -85,19 +86,19 @@
                             <dl class="flex items-center justify-between gap-4">
                                 <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Original price
                                 </dt>
-                                <dd class="text-base font-medium text-gray-900 dark:text-white">$7,592.00</dd>
+                                <dd class="text-base font-medium text-gray-900 dark:text-white">{{cart.priceHT}} €</dd>
                             </dl>
 
                             <dl class="flex items-center justify-between gap-4">
                                 <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Tax</dt>
-                                <dd class="text-base font-medium text-gray-900 dark:text-white">$799</dd>
+                                <dd class="text-base font-medium text-gray-900 dark:text-white">{{cart.TVA}} €</dd>
                             </dl>
                         </div>
 
                         <dl
                             class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                             <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                            <dd class="text-base font-bold text-gray-900 dark:text-white">$8,191.00</dd>
+                            <dd class="text-base font-bold text-gray-900 dark:text-white">{{cart.priceTTC}} €</dd>
                         </dl>
                     </div>
 

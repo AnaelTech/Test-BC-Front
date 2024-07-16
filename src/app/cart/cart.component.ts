@@ -14,7 +14,17 @@ import { OrderService } from '../orderService.service';
 })
 export class CartComponent implements OnInit, OnDestroy {
   articleCart: Article[] = [];
+  cart: Cart = {
+    id: 0,
+    article: [],
+    prestation: [],
+    quantity: 0,
+    priceHT: 0,
+    priceTTC: 0,
+    TVA: 0,
+  };
   cartService: CartService = inject(CartService);
+
   private orderService: OrderService = inject(OrderService);
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -52,6 +62,10 @@ export class CartComponent implements OnInit, OnDestroy {
     if (item.quantity <= 0) {
       item.quantity = 0;
     }
+  }
+
+  incrementPriceArticle(item: Article) {
+    this.cartService.incrementPriceArticle(item);
   }
 
   // OnSubmit() {
