@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { UserService } from '../user/user.service';
+import { User } from '../interface';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +13,23 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   auth: AuthService = inject(AuthService);
+  userService: UserService = inject(UserService);
+  user: User = {
+    id: 0,
+    name: '',
+    lastname: '',
+    email: '',
+    roles: '',
+    picture: '',
+  };
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.isLoggedIn()) {
+      this.getUser();
+    }
+  }
 
   isLoggedIn() {
     return this.auth.isLoggedIn();
@@ -23,5 +38,16 @@ export class HeaderComponent {
   logout() {
     this.auth.logout();
     window.location.reload();
+  }
+
+  getUser() {
+    this.userService.getUserById().subscribe((data: User) => {
+      this.user = data;
+      console.log(this.user);
+    });
+  }
+
+  isAdmin() {
+    return this.user.roles.includes('ROLE_ADMIN');
   }
 }

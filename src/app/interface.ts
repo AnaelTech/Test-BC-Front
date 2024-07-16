@@ -41,6 +41,7 @@ export interface Article {
   picture: string;
   category: string;
   quantity: number;
+  price: number;
 }
 
 export interface Category {

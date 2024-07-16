@@ -1,9 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ArticleService } from '../article.service';
-import { PrestationService } from '../../prestation/prestation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../cart.service';
-import { ApiListResponse, Prestation, Category } from '../../interface';
+import { Prestation, Category } from '../../interface';
 
 @Component({
   selector: 'app-article-detail',
@@ -14,10 +13,9 @@ import { ApiListResponse, Prestation, Category } from '../../interface';
 })
 export class ArticleDetailComponent implements OnInit {
   private articleService: ArticleService = inject(ArticleService);
-  private prestationService: PrestationService = inject(PrestationService);
   private cartService: CartService = inject(CartService);
   public prestations: Prestation[] = [];
-  public category: Category | undefined;
+  public category: Category[] = [];
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
   article = {
@@ -26,8 +24,8 @@ export class ArticleDetailComponent implements OnInit {
     description: '',
     picture: '',
     category: '',
+    price: 0,
   };
-  categoryId: string = '';
 
   constructor() {}
 
@@ -40,6 +38,20 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.getArticle(id).subscribe((article: any) => {
       this.article = article;
       console.log(this.article);
+      this.articleService
+        .getOriginCategory(this.article.category)
+        .subscribe((category: any) => {
+          this.category = category;
+          const prestationIds = category.Prestation;
+
+          prestationIds.forEach((id: string) => {
+            this.articleService
+              .getOriginPrestation(id)
+              .subscribe((prestation: any) => {
+                this.prestations.push(prestation);
+              });
+          });
+        });
     });
   }
 
