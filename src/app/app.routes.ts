@@ -20,6 +20,9 @@ import { ArticleListComponent } from './article/article-list/article-list.compon
 import { ArticleDetailComponent } from './article/article-detail/article-detail.component';
 import { CartComponent } from './cart/cart.component';
 import { ContactComponent } from './contact-us/contact/contact.component';
+import { CrudArticleComponent } from './admin/article/crud-article/crud-article.component';
+import { FormEditArticleComponent } from './admin/article/form-edit/form-edit-article.component';
+import { FormRegisterArticleComponent } from './admin/article/form-register/form-register-article.component';
 
 export const routes: Routes = [
   {
@@ -106,6 +109,21 @@ export const routes: Routes = [
       {
         path: 'prestations/:id',
         component: FormEditPrestationComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'articles',
+        component: CrudArticleComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'articles/add',
+        component: FormRegisterArticleComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'articles/:id',
+        component: FormEditArticleComponent,
         canActivate: [adminGuard],
       },
     ],

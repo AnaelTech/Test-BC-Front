@@ -19,14 +19,7 @@ import {
 export class FormEditPrestationComponent implements OnInit {
   prestationService: PrestationService = inject(PrestationService);
   prestations: Prestation[] = [];
-  prestation: Prestation = {
-    id: 0,
-    name: '',
-    description: '',
-    price: 0,
-    picture: '',
-    category: '',
-  };
+  prestation: Prestation | undefined;
   route: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
   public formEditPrestation: FormGroup = new FormGroup({
@@ -37,6 +30,10 @@ export class FormEditPrestationComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.getCurrentPrestation();
+  }
+
+  getCurrentPrestation() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.prestationService.getPrestationById(id).subscribe(

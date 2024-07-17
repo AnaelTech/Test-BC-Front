@@ -14,14 +14,7 @@ import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 export class FormEditComponent implements OnInit {
   userService: UserService = inject(UserService);
   users: User[] = [];
-  user: User = {
-    id: 0,
-    name: '',
-    lastname: '',
-    email: '',
-    roles: '',
-    picture: '',
-  };
+  user: User | undefined;
   route: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
   public formEditUser: FormGroup = new FormGroup({
@@ -32,6 +25,10 @@ export class FormEditComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.userService.getUser(id).subscribe(

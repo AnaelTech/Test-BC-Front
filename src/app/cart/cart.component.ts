@@ -62,16 +62,13 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartService.decrementQuantity(item);
     if (item.quantity <= 0) {
       item.quantity = 0;
+      this.deleteItem(item);
     }
   }
 
-  incrementPriceArticle(item: Article) {
-    this.cartService.incrementPriceArticle(item);
+  OnSubmit() {
+    this.cartService.getCartItems().subscribe((cartItems: Article[]) => {
+      this.orderService.createOrder();
+    });
   }
-
-  // OnSubmit() {
-  //   this.cartService.getCartItems().subscribe((cartItems: Article[]) => {
-  //     this.orderService.createOrder(cartItems);
-  //   });
-  // }
 }

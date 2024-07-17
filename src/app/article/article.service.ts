@@ -25,4 +25,20 @@ export class ArticleService {
   getCategory(): Observable<ApiListResponse<Category>> {
     return this.http.get<ApiListResponse<Category>>(this.url + 'categories');
   }
+
+  deleteArticle(id: number | undefined) {
+    return this.http.delete(this.url + 'articles/' + id);
+  }
+
+  updateArticle(article: Article): Observable<Article> {
+    return this.http.put<Article>(this.url + 'articles/' + article.id, article);
+  }
+
+  getArticleById(id: string): Observable<Article> {
+    return this.http.get<Article>(this.url + 'articles/' + id);
+  }
+
+  addArticle(article: Article): Observable<Article> {
+    return this.http.post<Article>(this.url + 'articles', article);
+  }
 }

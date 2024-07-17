@@ -1,6 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ApiListResponse, Order } from './interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +12,10 @@ export class OrderService {
   private http: HttpClient = inject(HttpClient);
 
   constructor() {}
+
+  getOrders(): Observable<ApiListResponse<Order>> {
+    return this.http.get<ApiListResponse<Order>>(this.url + 'orders');
+  }
 
   createOrder() {
     return this.http.post(this.url + 'orders', {});

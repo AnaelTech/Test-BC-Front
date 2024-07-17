@@ -30,14 +30,12 @@ export class FormRegisterPrestationComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  Register() {
+  RegisterPrestation() {
     if (this.formRegisterPrestation.valid) {
       this.prestationService
         .addPrestation(this.formRegisterPrestation.value)
         .subscribe({
           complete: () => {
-            // console.log('Inscription terminée, veuillez vous connecter.');
-            // console.log(this.formRegisterUser.value);
             this.router.navigate(['/admin/prestations']);
           },
           error: (err: any) => {
@@ -45,7 +43,6 @@ export class FormRegisterPrestationComponent implements OnInit {
               "L'utilisateur existe déjà ou une autre erreur est survenue :",
               err
             );
-            //console.log(this.formRegisterUser.value);
           },
         });
     } else {
