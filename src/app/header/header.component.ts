@@ -15,6 +15,7 @@ export class HeaderComponent {
   auth: AuthService = inject(AuthService);
   userService: UserService = inject(UserService);
   user: User = {
+    '@id': '',
     id: 0,
     name: '',
     lastname: '',

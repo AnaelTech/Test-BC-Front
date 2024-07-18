@@ -57,8 +57,20 @@
                             First Name
                         </label>
 
-                        <input formControlName="name" type="text" id="FirstName" name="name"
+                        <input formControlName="name" type="text" id="FirstName" name="name" required
                             class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                        @if(formRegister.get('name')?.invalid && (formRegister.get('name')?.dirty ||
+                        formRegister.get('name')?.touched)){
+                        <div>
+                            @if (formRegister.get('name')?.errors?.['required']) {
+                            <p class="text-red-500">
+                                First Name is
+                                required
+                            </p>
+
+                            }
+                        </div>
+                        }
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
@@ -66,15 +78,27 @@
                             Last Name
                         </label>
 
-                        <input formControlName="lastname" type="text" id="LastName" name="last_name"
+                        <input formControlName="lastname" type="text" id="LastName" name="last_name" required
                             class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                        @if(formRegister.get('lastname')?.invalid && (formRegister.get('lastname')?.dirty ||
+                        formRegister.get('lastname')?.touched)){
+                        <div>
+                            @if (formRegister.get('lastname')?.errors?.['required']) {
+                            <p class="text-red-500">
+                                LastName is
+                                required
+                            </p>
+
+                            }
+                        </div>
+                        }
                     </div>
                     <div class="col-span-6 sm:col-span-3">
                         <label for="Adresse" class="block text-sm font-medium text-gray-700">
                             Adresse
                         </label>
 
-                        <input formControlName="adresse" type="text" id="Adresse" name="adresse"
+                        <input formControlName="adresse" type="text" id="Adresse" name="adresse" required
                             class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
                     </div>
                     <div class="col-span-6 sm:col-span-3">
@@ -82,21 +106,34 @@
                             Birthday
                         </label>
 
-                        <input formControlName="birthday" type="date" id="Birthday" name="birthday"
+                        <input formControlName="birthday" type="date" id="Birthday" name="birthday" required
                             class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
                     </div>
 
                     <div class="col-span-6">
                         <label for="Email" class="block text-sm font-medium text-gray-700"> Email </label>
 
-                        <input formControlName="email" type="email" id="Email" name="email"
+                        <input formControlName="email" type="email" id="Email" name="email" required
                             class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                        @if(formRegister.get('email')?.invalid && (formRegister.get('email')?.dirty ||
+                        formRegister.get('email')?.touched)){
+                        <div>
+                            @if (formRegister.get('email')?.errors?.['required']) {
+                            <p class="text-red-500">Email is
+                                required</p>
+                            }
+                            @if (formRegister.get('email')?.errors?.['email']) {
+                            <p class="text-red-500">Enter a valid
+                                email</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                         <label for="Password" class="block text-sm font-medium text-gray-700"> Password </label>
 
-                        <input formControlName="password" type="password" id="Password" name="password"
+                        <input formControlName="password" type="password" id="Password" name="password" required
                             class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
                     </div>
 
@@ -105,7 +142,7 @@
                             Gender
                         </label>
 
-                        <select formControlName="genre" name="genre" id="Genre"
+                        <select formControlName="genre" name="genre" id="Genre" required
                             class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
                             @for(gender of genders; track genders){
                             <option [value]="gender">{{gender}}</option>

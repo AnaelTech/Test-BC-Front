@@ -23,6 +23,7 @@ import { ContactComponent } from './contact-us/contact/contact.component';
 import { CrudArticleComponent } from './admin/article/crud-article/crud-article.component';
 import { FormEditArticleComponent } from './admin/article/form-edit/form-edit-article.component';
 import { FormRegisterArticleComponent } from './admin/article/form-register/form-register-article.component';
+import { CrudOrderComponent } from './admin/order/crud-order/crud-order.component';
 
 export const routes: Routes = [
   {
@@ -124,6 +125,11 @@ export const routes: Routes = [
       {
         path: 'articles/:id',
         component: FormEditArticleComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'orders',
+        component: CrudOrderComponent,
         canActivate: [adminGuard],
       },
     ],

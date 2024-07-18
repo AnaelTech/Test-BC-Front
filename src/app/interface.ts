@@ -1,4 +1,5 @@
 export interface User {
+  '@id': string;
   id?: number;
   name: string;
   lastname: string;
@@ -65,14 +66,9 @@ export interface Cart {
 }
 
 export interface Order {
-  id: number;
-  clientId: number;
-  status: string;
-  totalPaid: number;
-  articles: OrderArticle[];
-}
-
-export interface OrderArticle {
-  articleId: number;
-  quantity: number;
+  id?: number;
+  client: string;
+  statut: string[];
+  total: number;
+  article_commande: string[]; // TODO: change to OrderArticle[]
 }

@@ -1,9 +1,10 @@
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { CartService } from '../cart.service';
-import { Article, Cart } from '../interface';
+import { Article, Cart, Order, User } from '../interface';
 import { Subject, takeUntil } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { OrderService } from '../orderService.service';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,18 @@ import { OrderService } from '../orderService.service';
 })
 export class CartComponent implements OnInit, OnDestroy {
   articleCart: Article[] = [];
-  price = signal(0);
+  totalPrice = signal(0);
+  totalPaid = 0;
+
+  user: User = {
+    '@id': '',
+    id: 0,
+    name: '',
+    lastname: '',
+    email: '',
+    roles: '',
+    picture: '',
+  };
   cart: Cart = {
     id: 0,
     article: [],
@@ -24,7 +36,9 @@ export class CartComponent implements OnInit, OnDestroy {
     priceTTC: 0,
     TVA: 0,
   };
-  cartService: CartService = inject(CartService);
+  private cartService: CartService = inject(CartService);
+
+  private userService: UserService = inject(UserService);
 
   private orderService: OrderService = inject(OrderService);
 
@@ -34,10 +48,17 @@ export class CartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.showCart();
+    this.getUser();
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
+  }
+  getUser() {
+    this.userService.getUserById().subscribe((data: User) => {
+      this.user = data;
+      console.log(this.user);
+    });
   }
 
   showCart() {
@@ -46,6 +67,7 @@ export class CartComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((articleCart: Article[]) => {
         this.articleCart = articleCart;
+        this.updateTotalPrice();
       });
   }
 
@@ -56,6 +78,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   incrementQuantity(item: Article) {
     this.cartService.incrementQuantity(item);
+    this.updateTotalPrice();
   }
 
   decrementQuantity(item: Article) {
@@ -64,11 +87,45 @@ export class CartComponent implements OnInit, OnDestroy {
       item.quantity = 0;
       this.deleteItem(item);
     }
+    this.updateTotalPrice();
+  }
+
+  updateTotalPrice() {
+    const newTotal = this.articleCart.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+    this.totalPrice.set(newTotal);
+    this.totalPaid = this.totalPrice();
+    console.log(this.totalPaid);
+  }
+
+  calculateItemTotalPrice(article: Article): number {
+    return article.price * article.quantity;
   }
 
   OnSubmit() {
-    this.cartService.getCartItems().subscribe((cartItems: Article[]) => {
-      this.orderService.createOrder();
+    let orderArticle: string[] = [];
+    this.articleCart.forEach((article) => {
+      orderArticle.push(article['@id']);
     });
+
+    const newOrder: Order = {
+      client: this.user['@id'],
+      statut: ['pending'],
+      total: this.totalPaid,
+      article_commande: orderArticle,
+    };
+
+    this.orderService.createOrder(newOrder).subscribe(
+      (response) => {
+        console.log('Order created successfully:', response);
+        console.log(newOrder);
+      },
+      (error) => {
+        console.error('Error creating order:', error);
+        console.log(newOrder);
+      }
+    );
   }
 }

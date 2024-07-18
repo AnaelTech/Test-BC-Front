@@ -17,7 +17,11 @@ export class OrderService {
     return this.http.get<ApiListResponse<Order>>(this.url + 'orders');
   }
 
-  createOrder() {
-    return this.http.post(this.url + 'orders', {});
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.url + 'orders', order);
+  }
+
+  deleteOrder(id: number | undefined): Observable<Order> {
+    return this.http.delete<Order>(this.url + 'orders/' + id);
   }
 }
