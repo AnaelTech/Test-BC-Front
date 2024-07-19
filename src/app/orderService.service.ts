@@ -24,4 +24,12 @@ export class OrderService {
   deleteOrder(id: number | undefined): Observable<Order> {
     return this.http.delete<Order>(this.url + 'orders/' + id);
   }
+
+  updateOrder(order: Order): Observable<Order> {
+    return this.http.put<Order>(this.url + 'orders/' + order.id, order);
+  }
+
+  getOrder(id: string | undefined): Observable<Order> {
+    return this.http.get<Order>(this.url + 'orders/' + id);
+  }
 }

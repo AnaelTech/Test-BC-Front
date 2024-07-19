@@ -24,6 +24,7 @@ import { CrudArticleComponent } from './admin/article/crud-article/crud-article.
 import { FormEditArticleComponent } from './admin/article/form-edit/form-edit-article.component';
 import { FormRegisterArticleComponent } from './admin/article/form-register/form-register-article.component';
 import { CrudOrderComponent } from './admin/order/crud-order/crud-order.component';
+import { FormEditOrderComponent } from './admin/order/form-edit-order/form-edit-order.component';
 
 export const routes: Routes = [
   {
@@ -130,6 +131,11 @@ export const routes: Routes = [
       {
         path: 'orders',
         component: CrudOrderComponent,
+        canActivate: [adminGuard],
+      },
+      {
+        path: 'orders/:id',
+        component: FormEditOrderComponent,
         canActivate: [adminGuard],
       },
     ],

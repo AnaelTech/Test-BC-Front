@@ -120,8 +120,14 @@
                         </td>
                         <td class="px-4 py-3">
                             <div class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                employee </div>
-                            <!-- {{order.employee.name}} -->
+                                <div class="text-center">
+                                    @if(!order.employee){
+                                    No employee on this order
+                                    }@else{
+                                    {{order.employee.name}}
+                                    }
+                                </div>
+                            </div>
                         </td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="text-center">

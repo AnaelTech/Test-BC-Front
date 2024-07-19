@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiListResponse, Order } from '../../../interface';
+import { ApiListResponse, Order, User } from '../../../interface';
 import { OrderService } from '../../../orderService.service';
+import { UserService } from '../../../user/user.service';
 
 @Component({
   selector: 'app-crud-order',
@@ -12,9 +13,11 @@ import { OrderService } from '../../../orderService.service';
 })
 export class CrudOrderComponent {
   orders: any[] = [];
-  originalOrders: any[] = [];
+  originalOrders: Order[] = [];
+  selectedOrder: Order | null = null;
   router: Router = inject(Router);
   orderService: OrderService = inject(OrderService);
+  userService: UserService = inject(UserService);
 
   constructor() {}
 
@@ -56,5 +59,10 @@ export class CrudOrderComponent {
         // .includes(event.target.value.toLowerCase());
       });
     }
+  }
+
+  openModal(order: Order) {
+    this.selectedOrder = order;
+    console.log(this.selectedOrder);
   }
 }

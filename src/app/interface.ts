@@ -70,5 +70,6 @@ export interface Order {
   client: string;
   statut: string[];
   total: number;
-  article_commande: string[]; // TODO: change to OrderArticle[]
+  article_commande: string[];
+  employee?: string; // TODO: change to OrderArticle[]
 }
