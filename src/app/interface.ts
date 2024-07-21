@@ -43,6 +43,7 @@ export interface Article {
   category: Category;
   quantity: number;
   price: number;
+  prestations: Prestation[];
 }
 
 export interface Category {
