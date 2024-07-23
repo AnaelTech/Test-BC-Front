@@ -22,6 +22,7 @@ export class HeaderComponent {
     email: '',
     roles: '',
     picture: '',
+    adresse: '',
   };
 
   constructor() {}

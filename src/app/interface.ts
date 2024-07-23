@@ -7,6 +7,8 @@ export interface User {
   password?: string;
   roles: string;
   picture: string;
+  adresse: string;
+  orders?: Order[]; // TODO: change to OrderArticle[]
 }
 
 export interface ApiListResponse<T> {

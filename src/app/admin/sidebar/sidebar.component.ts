@@ -23,6 +23,7 @@ export class SidebarComponent implements OnInit {
     email: '',
     roles: '',
     picture: '',
+    adresse: '',
   };
   isSidebarOpen = false;
 

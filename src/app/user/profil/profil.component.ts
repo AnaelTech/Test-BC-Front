@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profil',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './profil.component.html',
   styleUrl: './profil.component.css',
 })
@@ -17,6 +18,8 @@ export class ProfilComponent implements OnInit {
     email: '',
     roles: '',
     picture: '',
+    order: [],
+    adresse: '',
   };
 
   constructor() {}
@@ -28,7 +31,6 @@ export class ProfilComponent implements OnInit {
   getUser() {
     this.userService.getUserById().subscribe((data: any) => {
       this.user = data;
-      console.log(this.user);
     });
   }
 }

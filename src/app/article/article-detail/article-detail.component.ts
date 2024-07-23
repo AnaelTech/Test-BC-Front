@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import { ArticleService } from '../article.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../cart.service';
@@ -19,6 +19,7 @@ export class ArticleDetailComponent implements OnInit {
   public category: Category[] = [];
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
+  totalPrice: number = 0;
   article = {
     id: 0,
     name: '',
@@ -26,7 +27,7 @@ export class ArticleDetailComponent implements OnInit {
     picture: '',
     category: '',
     price: 0,
-    prestation: this.prestations,
+    prestations: this.prestations,
   };
 
   constructor() {}
@@ -43,15 +44,17 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.getArticle(id).subscribe((article: any) => {
       this.article = article;
       this.prestations = article.category.Prestation;
+      this.calculateTotalPrice();
     });
   }
 
   addPrestation(prestation: Prestation) {
     const currentPrestations = this.selectedPrestationsSource.getValue();
-    this.article.prestation = [...currentPrestations, prestation];
+    this.article.prestations = [...currentPrestations, prestation];
     if (!currentPrestations.some((p) => p.id === prestation.id)) {
       this.selectedPrestationsSource.next([...currentPrestations, prestation]);
     }
+    this.calculateTotalPrice();
   }
 
   removePrestation(prestation: Prestation) {
@@ -59,19 +62,28 @@ export class ArticleDetailComponent implements OnInit {
     this.selectedPrestationsSource.next(
       currentPrestations.filter((p) => p.id !== prestation.id)
     );
+    this.calculateTotalPrice();
   }
 
   onPrestationSelect(event: any, prestation: Prestation): void {
     if (event.target.checked) {
       this.addPrestation(prestation);
-      console.log(this.article);
     } else {
       this.removePrestation(prestation);
-      console.log(this.article);
     }
   }
 
+  calculateTotalPrice() {
+    const selectedPrestations = this.selectedPrestationsSource.getValue();
+    const prestationsTotal = selectedPrestations.reduce(
+      (sum, p) => sum + p.price,
+      0
+    );
+    this.totalPrice = this.article.price + prestationsTotal;
+  }
+
   addToCart(id: number) {
+    this.article.price = this.totalPrice;
     this.cartService.addToCart(this.article);
     this.router.navigate(['/cart']);
   }

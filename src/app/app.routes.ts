@@ -25,6 +25,7 @@ import { FormEditArticleComponent } from './admin/article/form-edit/form-edit-ar
 import { FormRegisterArticleComponent } from './admin/article/form-register/form-register-article.component';
 import { CrudOrderComponent } from './admin/order/crud-order/crud-order.component';
 import { FormEditOrderComponent } from './admin/order/form-edit-order/form-edit-order.component';
+import { OrderHistoryComponent } from './user/order-history/order-history.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,10 @@ export const routes: Routes = [
       {
         path: 'profil',
         component: ProfilComponent,
+      },
+      {
+        path: 'order-history',
+        component: OrderHistoryComponent,
       },
       {
         path: 'prestations',

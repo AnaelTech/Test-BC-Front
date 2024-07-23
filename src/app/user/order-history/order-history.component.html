@@ -15,36 +15,28 @@
                 <nav class="mt-6">
                     <ul>
                         <li class="mb-4">
-                            <a href="#" class="text-gray-600 font-semibold hover:text-blue-600">Personal information</a>
+                            <a routerLink="/profil" class="text-gray-600 font-semibold hover:text-blue-600">Personal
+                                information</a>
                         </li>
                         <li class="mb-4">
-                            <a routerLink="/order-history"
-                                class="text-gray-600 font-semibold  hover:text-blue-600">Order History</a>
+                            <a href="#" class="text-gray-600 font-semibold  hover:text-blue-600">Order History</a>
                         </li>
                     </ul>
                 </nav>
             </div>
             <div class="w-3/4 p-6">
-                <h2 class="text-2xl font-semibold mb-6">Personal information</h2>
-                <p class="text-gray-600 mb-6">Manage your personal information, including phone numbers and email
-                    addresses where you can be contacted</p>
+                <h2 class="text-2xl font-semibold mb-6">Order History</h2>
                 <div class="grid grid-cols-2 gap-6">
-                    <div class="p-4 bg-gray-100 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">Name</h3>
-                        <p class="text-gray-800">{{user.name}} {{user.lastname}}</p>
-                    </div>
-                    <div class="p-4 bg-gray-100 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">Date of Birth</h3>
-                        <p class="text-gray-800">07 July 1993</p>
-                    </div>
-                    <div class="p-4 bg-gray-100 rounded-lg">
-                        <h3 class="text-lg font-semibold mb-2">Country Region</h3>
-                        <p class="text-gray-800">{{user.adresse}}</p>
-                    </div>
+                    @for(order of user.orders; track order.id){
                     <div class="col-span-2 p-4 bg-gray-100 rounded-lg">
                         <h3 class="text-lg font-semibold mb-2">Contactable at</h3>
-                        <p class="text-gray-800">{{user.email}}</p>
+                        @for( article of order.article_commande; track article){
+                        <p class="text-gray-800">{{article}}</p>
+                        }
+                        <p>{{order.statut}}</p>
+                        <p>{{order.total}} €</p>
                     </div>
+                    }
                 </div>
             </div>
         </div>

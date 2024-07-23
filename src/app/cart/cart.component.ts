@@ -26,6 +26,8 @@ export class CartComponent implements OnInit, OnDestroy {
     email: '',
     roles: '',
     picture: '',
+    adresse: '',
+    orders: [], // TODO: change to OrderArticle[]
   };
   cart: Cart = {
     id: 0,
@@ -36,6 +38,7 @@ export class CartComponent implements OnInit, OnDestroy {
     priceTTC: 0,
     TVA: 0,
   };
+
   private cartService: CartService = inject(CartService);
 
   private userService: UserService = inject(UserService);
@@ -57,7 +60,7 @@ export class CartComponent implements OnInit, OnDestroy {
   getUser() {
     this.userService.getUserById().subscribe((data: User) => {
       this.user = data;
-      console.log(this.user);
+      //console.log(this.user);
     });
   }
 
@@ -67,6 +70,7 @@ export class CartComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((articleCart: Article[]) => {
         this.articleCart = articleCart;
+
         this.updateTotalPrice();
       });
   }
@@ -97,7 +101,6 @@ export class CartComponent implements OnInit, OnDestroy {
     );
     this.totalPrice.set(newTotal);
     this.totalPaid = this.totalPrice();
-    console.log(this.totalPaid);
   }
 
   calculateItemTotalPrice(article: Article): number {

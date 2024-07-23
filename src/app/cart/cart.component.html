@@ -46,6 +46,12 @@
                             <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                                 <a href="#"
                                     class="text-base font-medium text-gray-900 hover:underline dark:text-white">{{article.description}}</a>
+                                <br>
+                                @for(prestation of article.prestations; track prestation.id){
+                                <span href="#" class="font-light text-xs text-gray-600 hover:underline dark:text-white">
+                                    {{prestation.name}} +{{prestation.price}} €</span>
+                                <br>
+                                }
                                 <div class="flex items-center gap-4">
                                     <button type="button"
                                         class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white">
