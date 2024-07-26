@@ -14,6 +14,8 @@ export class ArticleListComponent implements OnInit {
   public articles: Article[] = [];
   public categorys: Category[] = [];
   public category: Category[] = [];
+  public filteredArticles: Article[] = [];
+  public selectedCategories: number[] = [];
   private router: Router = inject(Router);
   private articleService: ArticleService = inject(ArticleService);
   count = 0;
@@ -29,6 +31,7 @@ export class ArticleListComponent implements OnInit {
     this.articleService.getArticles().subscribe({
       next: (response: ApiListResponse<Article>) => {
         this.articles = response['hydra:member'];
+        this.filteredArticles = this.articles;
       },
       error: (err) => console.error(err),
     });
@@ -45,5 +48,44 @@ export class ArticleListComponent implements OnInit {
 
   goToDetail(article: Article) {
     this.router.navigate(['articles/', article.id]);
+  }
+
+  filterArticlesbyCategory(categoryId: number[]) {
+    console.log('Category ID:', categoryId);
+    if (categoryId.length > 0) {
+      this.filteredArticles = this.articles.filter(
+        (article) =>
+          article.category &&
+          article.category.id !== undefined &&
+          categoryId.includes(article.category.id)
+      );
+      console.log(this.filteredArticles);
+    } else {
+      this.filteredArticles = this.articles;
+    }
+  }
+
+  updateSelectedCategories(categoryId: number | undefined, event: Event) {
+    if (categoryId === undefined) return;
+
+    const inputElement = event.target as HTMLInputElement;
+    const isChecked = inputElement.checked;
+
+    if (isChecked) {
+      this.selectedCategories.push(categoryId);
+    } else {
+      const index = this.selectedCategories.indexOf(categoryId);
+      if (index > -1) {
+        this.selectedCategories.splice(index, 1);
+      }
+    }
+    this.count = this.selectedCategories.length;
+    this.filterArticlesbyCategory(this.selectedCategories);
+  }
+
+  resetFilters() {
+    this.selectedCategories = [];
+    this.count = 0;
+    this.filteredArticles = this.articles;
   }
 }

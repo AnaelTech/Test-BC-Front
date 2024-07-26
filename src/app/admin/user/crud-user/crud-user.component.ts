@@ -11,10 +11,11 @@ import { Router } from '@angular/router';
   styleUrl: './crud-user.component.css',
 })
 export class CrudUserComponent implements OnInit {
-  userService: UserService = inject(UserService);
-  router: Router = inject(Router);
-  users: User[] = [];
-  originalUsers: User[] = [];
+  private userService: UserService = inject(UserService);
+  private router: Router = inject(Router);
+  public users: User[] = [];
+  public originalUsers: User[] = [];
+  public nbOrders: number = 0;
 
   constructor() {}
 
@@ -27,6 +28,7 @@ export class CrudUserComponent implements OnInit {
       this.users = response['hydra:member'].filter((user) =>
         this.isAdmin(user)
       );
+      console.log(this.users);
     });
   }
 

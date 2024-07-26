@@ -22,7 +22,7 @@ export class FormEditOrderComponent {
   orderService: OrderService = inject(OrderService);
   orders: Order[] = [];
   users: User[] = [];
-  order: Order | undefined;
+  order: Order | undefined = undefined;
   userService: UserService = inject(UserService);
   route: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
@@ -50,7 +50,7 @@ export class FormEditOrderComponent {
             employee: order.employee,
             article_commande: order.article_commande,
           });
-          console.log(this.formEditOrder.value.client);
+          //console.log(this.order);
         },
         (error) => {
           console.error('Error fetching prestation', error);
@@ -63,10 +63,10 @@ export class FormEditOrderComponent {
     if (!Array.isArray(this.formEditOrder.value.statut)) {
       this.formEditOrder.value.statut = [this.formEditOrder.value.statut];
     }
-
     this.formEditOrder.value.client = this.formEditOrder.value.client['@id'];
     this.formEditOrder.value.article_commande =
       this.formEditOrder.value.article_commande['@id'];
+    console.log(this.formEditOrder.value.article_commande);
 
     if (this.formEditOrder.valid) {
       const updatedOrder: Order = {
