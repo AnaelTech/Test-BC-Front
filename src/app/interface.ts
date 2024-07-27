@@ -18,7 +18,7 @@ export interface ApiListResponse<T> {
 }
 
 export interface Credentials {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -74,5 +74,5 @@ export interface Order {
   statut: string[];
   total: number;
   article_commande: (string | Article)[];
-  employee?: string; // TODO: change to OrderArticle[]
+  employee?: string;
 }

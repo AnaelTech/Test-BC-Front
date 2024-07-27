@@ -16,7 +16,7 @@ export class LoginAdminComponent {
   private auth: AuthService = inject(AuthService);
   private router: Router = inject(Router);
   public formLoginAdmin: FormGroup = new FormGroup({
-    username: new FormControl(''),
+    email: new FormControl(''),
     password: new FormControl(''),
   });
 
@@ -28,7 +28,10 @@ export class LoginAdminComponent {
     if (this.formLoginAdmin.valid) {
       this.auth.login(this.formLoginAdmin.value).subscribe({
         next: () => {
-          if (this.isAdmin() && this.auth.isLoggedIn()) {
+          if (
+            this.isAdmin() ||
+            (this.isSuperAdmin() && this.auth.isLoggedIn())
+          ) {
             console.log('Connexion réussie');
             this.router.navigate(['admin/dashboard']);
           } else {
@@ -53,5 +56,9 @@ export class LoginAdminComponent {
 
   isAdmin() {
     return this.userService.isAdmin();
+  }
+
+  isSuperAdmin() {
+    return this.userService.isSuperAdmin();
   }
 }

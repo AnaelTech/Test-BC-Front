@@ -65,7 +65,6 @@ export class UserService {
       const isAdmin = userRoles.includes('ROLE_ADMIN');
       return isAdmin;
     } else {
-      console.log('role : VISITOR');
       return false;
     }
   }
@@ -74,7 +73,6 @@ export class UserService {
     const userRoles = this.getRoles();
     if (userRoles && Array.isArray(userRoles)) {
       const isSuperAdmin = userRoles.includes('ROLE_SUPER_ADMIN');
-      console.log('role : SUPER_ADMIN');
       return isSuperAdmin;
     } else {
       return false;

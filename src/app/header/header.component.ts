@@ -45,10 +45,15 @@ export class HeaderComponent {
   getUser() {
     this.userService.getUserById().subscribe((data: User) => {
       this.user = data;
+      console.log(this.user);
     });
   }
 
   isAdmin() {
-    return this.user.roles.includes('ROLE_ADMIN');
+    return this.userService.isAdmin();
+  }
+
+  isSuperAdmin() {
+    return this.userService.isSuperAdmin();
   }
 }

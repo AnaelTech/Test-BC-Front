@@ -5,9 +5,9 @@ import { inject } from '@angular/core';
 export const adminGuard: CanActivateFn = () => {
   const userService = inject(UserService);
   const router = inject(Router);
-  if (!userService.isAdmin()) {
-    router.navigate(['/']);
-    return false;
+  if (userService.isAdmin() || userService.isSuperAdmin()) {
+    return true;
   }
-  return true;
+  router.navigate(['/']);
+  return false;
 };
