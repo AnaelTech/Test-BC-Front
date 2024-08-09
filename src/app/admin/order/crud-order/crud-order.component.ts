@@ -15,6 +15,7 @@ export class CrudOrderComponent {
   orders: any[] = [];
   originalOrders: Order[] = [];
   selectedOrder: Order | null = null;
+  currentEmployee: User | null = null;
   router: Router = inject(Router);
   orderService: OrderService = inject(OrderService);
   userService: UserService = inject(UserService);
@@ -30,8 +31,31 @@ export class CrudOrderComponent {
       next: (response: ApiListResponse<Order>) => {
         this.orders = response['hydra:member'];
         this.originalOrders = [...this.orders];
-        console.log(this.orders);
+        //console.log(this.orders);
+        this.getCurrentEmployee();
       },
+    });
+  }
+
+  getCurrentEmployee() {
+    this.userService.getUserById().subscribe((data: User) => {
+      this.currentEmployee = data;
+       // avoir le user courant pour filtrer les orders si le user est égale a l'employee de l'order alors j'affiche les order de l'employee
+       if (this.currentEmployee) {
+        if (this.isSuperAdmin()) {
+          // Si l'utilisateur est superAdmin, ne filtre pas les commandes
+          this.orders = this.originalOrders;
+          console.log('superadmin');  
+        } else {
+          // Si l'utilisateur n'est pas superAdmin, filtrer les commandes
+            this.orders = this.originalOrders.filter((order: Order) => {
+              return order.employee === this.currentEmployee?.id;
+            });
+            console.log('non superadmin');
+        }
+        // Si l'utilisateur n'est ni superAdmin ni employé lié à une commande, this.orders sera vide
+        console.log('nononononno');
+            }
     });
   }
 
@@ -59,6 +83,10 @@ export class CrudOrderComponent {
         // .includes(event.target.value.toLowerCase());
       });
     }
+  }
+
+  isSuperAdmin() {
+    return this.userService.isSuperAdmin();
   }
 
   openModal(order: Order) {
