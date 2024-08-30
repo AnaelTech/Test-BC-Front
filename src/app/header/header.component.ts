@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../user/user.service';
@@ -11,7 +11,7 @@ import { User } from '../interface';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   auth: AuthService = inject(AuthService);
   userService: UserService = inject(UserService);
   user: User = {

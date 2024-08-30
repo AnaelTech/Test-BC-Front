@@ -2,9 +2,10 @@ import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { CartService } from '../cart.service';
 import { Article, Cart, Order, User } from '../interface';
 import { Subject, takeUntil } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { OrderService } from '../orderService.service';
 import { UserService } from '../user/user.service';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -38,6 +39,10 @@ export class CartComponent implements OnInit, OnDestroy {
     priceTTC: 0,
     TVA: 0,
   };
+
+  private router: Router = inject(Router);
+
+  private authService: AuthService = inject(AuthService);
 
   private cartService: CartService = inject(CartService);
 
@@ -108,6 +113,12 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   OnSubmit() {
+    if(this.totalPaid == 0){
+      alert("Please add some items to your cart");
+      return;
+    } else if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['login']);
+    } else {
     let orderArticle: string[] = [];
     this.articleCart.forEach((article) => {
       orderArticle.push(article['@id']);
@@ -124,11 +135,14 @@ export class CartComponent implements OnInit, OnDestroy {
       (response) => {
         console.log('Order created successfully:', response);
         console.log(newOrder);
+        this.router.navigate(['profil']);
       },
       (error) => {
         console.error('Error creating order:', error);
         console.log(newOrder);
+        this.router.navigate(['login']);
       }
     );
   }
+}
 }
