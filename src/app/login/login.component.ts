@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
   });
+  public errorMessage: string = '';
 
   ngOnInit(): void {}
 
@@ -37,15 +38,19 @@ export class LoginComponent implements OnInit {
           this.formLogin.reset();
         },
         error: (error) => {
-          console.log('Erreur de connexion', error);
+          this.errorMessage = 'L\'email ou le mot de passe est incorrect';
           this.router.navigate(['/login']);
           this.formLogin.reset();
         },
       });
     } else {
-      console.log('Formulaire invalide');
+      this.errorMessage = 'Email ou mot de passe incorrect';
       this.router.navigate(['/login']);
       this.formLogin.reset();
     }
+  }
+
+  hasError(controlName: string, errorName: string): boolean {
+    return this.formLogin.controls[controlName].hasError(errorName) && this.formLogin.controls[controlName].touched;
   }
 }

@@ -133,13 +133,13 @@ export class CartComponent implements OnInit, OnDestroy {
 
     this.orderService.createOrder(newOrder).subscribe(
       (response) => {
-        console.log('Order created successfully:', response);
-        console.log(newOrder);
+        // console.log('Order created successfully:', response);
+        // console.log(newOrder);
         this.router.navigate(['profil']);
       },
       (error) => {
-        console.error('Error creating order:', error);
-        console.log(newOrder);
+        // console.error('Error creating order:', error);
+        // console.log(newOrder);
         this.router.navigate(['login']);
       }
     );
